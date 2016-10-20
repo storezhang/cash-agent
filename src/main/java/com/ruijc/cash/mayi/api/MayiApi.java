@@ -1,4 +1,4 @@
-package com.ruijc.cash.zpp.api;
+package com.ruijc.cash.mayi.api;
 
 import com.ruijc.http.HttpClient;
 import com.ruijc.util.NumberUtils;
@@ -13,12 +13,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 赚泡泡工具类
+ * 蚂蚁网页挂机工具类
  *
  * @author Storezhang
  */
 @Service
-public class ZppApi {
+public class MayiApi {
 
     @Autowired
     private HttpClient client;
@@ -26,17 +26,11 @@ public class ZppApi {
     public boolean login(String username, String password) {
         boolean success = false;
 
-        if (!client.downloadFile("http://www.zhuanpaopao.com/welcome/verifyCode", "code.jpg")) {
-            success = false;
-            return success;
-        }
-        String code = client.post("http://data.tehir.cn/url/Api/VCRInterface.ashx?apikey=646B7F4EB194A042E76E2615924FF84A&flag=zhuanpaopao", null, null, "", "img", new File("code.jpg"));
         Map<String, String> params = new HashMap<String, String>();
-        params.put("uid_mail", username);
-        params.put("pwd", password);
-        params.put("check_code", code);
+        params.put("username", username);
+        params.put("password", password);
 
-        String ret = client.post("http://www.zhuanpaopao.com/welcome/login", params, null, "http://www.zhuanpaopao.com/", "", null);
+        String ret = client.post("http://www.mayiluntan.com/login/dologin.html", params, null, "http://www.mayiluntan.com", "", null);
         if (!"ok".equals(ret)) {
             success = false;
         } else {

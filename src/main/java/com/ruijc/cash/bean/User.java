@@ -1,4 +1,4 @@
-package com.ruijc.cash.zpp.bean;
+package com.ruijc.cash.bean;
 
 import com.ruijc.BaseObject;
 

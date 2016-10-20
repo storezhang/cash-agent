@@ -1,4 +1,4 @@
-package com.ruijc.cash.zpp;
+package com.ruijc.cash.mayi;
 
 import com.ruijc.cash.bean.User;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -7,14 +7,14 @@ import javax.annotation.PostConstruct;
 import java.util.List;
 
 /**
- * 赚泡泡配置
+ * 蚂蚁网页挂机配置
  *
  * @author Storezhang
  */
-@ConfigurationProperties(prefix = "zpp")
-public class ZppProperties {
+@ConfigurationProperties(prefix = "mayi")
+public class MayiProperties {
 
-    public static final String LOG_STORE = "zpp";
+    public static final String LOG_STORE = "mayi";
     public static final String LOG_TOP_CASH = "cash";
     public static final String LOG_TOP_LOGIN = "login";
 
@@ -24,7 +24,7 @@ public class ZppProperties {
 
     @PostConstruct
     public void init() {
-        minCash = 5;
+        minCash = 1;
         retry = 10;
     }
 
