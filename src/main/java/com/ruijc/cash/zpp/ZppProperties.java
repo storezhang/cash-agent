@@ -1,6 +1,6 @@
-package com.ruijc.zpp;
+package com.ruijc.cash.zpp;
 
-import com.ruijc.zpp.bean.User;
+import com.ruijc.cash.zpp.bean.User;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import javax.annotation.PostConstruct;

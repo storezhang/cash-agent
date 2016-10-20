@@ -1,4 +1,4 @@
-package com.ruijc.zpp;
+package com.ruijc.cash;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,7 +7,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class ZppAgentApplicationTests {
+public class CashAgentApplicationTests {
 
     @Test
     public void contextLoads() {

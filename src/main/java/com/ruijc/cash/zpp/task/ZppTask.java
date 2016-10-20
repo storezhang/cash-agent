@@ -1,11 +1,11 @@
-package com.ruijc.zpp.task;
+package com.ruijc.cash.zpp.task;
 
 import com.ruijc.log.ILogger;
 import com.ruijc.util.CollectionUtils;
 import com.ruijc.util.StringUtils;
-import com.ruijc.zpp.ZppProperties;
-import com.ruijc.zpp.api.ZppApi;
-import com.ruijc.zpp.bean.User;
+import com.ruijc.cash.zpp.ZppProperties;
+import com.ruijc.cash.zpp.api.ZppApi;
+import com.ruijc.cash.zpp.bean.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.scheduling.annotation.Scheduled;

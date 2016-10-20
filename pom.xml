@@ -4,12 +4,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.ruijc</groupId>
-    <artifactId>zpp-agent</artifactId>
+    <artifactId>cash-agent</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>
 
-    <name>zpp-agent</name>
-    <description>赚泡泡众测联盟机器人。</description>
+    <name>cash-agent</name>
+    <description>自动提现机器人。</description>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -76,6 +76,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
                     <executable>true</executable>
+                    <finalName>cash-agent</finalName>
                 </configuration>
             </plugin>
 
