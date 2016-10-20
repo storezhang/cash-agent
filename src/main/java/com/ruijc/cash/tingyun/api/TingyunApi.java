@@ -1,4 +1,4 @@
-package com.ruijc.cash.mayi.api;
+package com.ruijc.cash.tingyun.api;
 
 import com.ruijc.http.HttpClient;
 import com.ruijc.util.NumberUtils;
@@ -9,6 +9,7 @@ import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,7 +19,7 @@ import java.util.Map;
  * @author Storezhang
  */
 @Service
-public class MayiApi {
+public class TingyunApi {
 
     @Autowired
     private HttpClient client;
@@ -26,11 +27,17 @@ public class MayiApi {
     public boolean login(String username, String password) {
         boolean success = false;
 
+        if (!client.downloadFile("http://member.tingyun.com/member/user/getImage", "tingyun-code.jpg")) {
+            success = false;
+            return success;
+        }
+        String code = client.post("http://data.tehir.cn/url/Api/VCRInterface.ashx?apikey=646B7F4EB194A042E76E2615924FF84A&flag=tingyun", null, null, "", "img", new File("tingyun-code.jpg"));
         Map<String, String> params = new HashMap<String, String>();
-        params.put("username", username);
+        params.put("loginName", username);
         params.put("password", password);
+        params.put("captcha", code);
 
-        String ret = client.post("http://www.mayiluntan.com/login/dologin.html", params, null, "http://www.mayiluntan.com", "", null);
+        String ret = client.post("http://member.tingyun.com/member/login", params, null, "http://www.tingyun.com", "", null);
         if (!ret.contains("登录成功")) {
             success = false;
         } else {
@@ -55,21 +62,6 @@ public class MayiApi {
         return money;
     }
 
-    public int getSurplusTixianTimes() {
-        int surplus = 0;
-
-        String surplusInfo = client.get("http://www.mayiluntan.com/home/tixian/index.html");
-        Document doc = Jsoup.parse(surplusInfo);
-        Element timesElement = doc.select(".guaji_index h2 span").last();
-        if (null == timesElement) {
-            return surplus;
-        }
-
-        surplus = NumberUtils.getInt(timesElement.text());
-
-        return surplus;
-    }
-
     public void logout() {
         client.clearCookies();
     }
@@ -78,8 +70,8 @@ public class MayiApi {
         boolean success;
 
         Map<String, String> cashParams = new HashMap<String, String>();
-        cashParams.put("tixian_jine", money + "");
-        String cashRet = client.post("http://www.mayiluntan.com/home/tixian/create.html", cashParams);
+        cashParams.put("prize", money + "");
+        String cashRet = client.post("http://member.tingyun.com/member/member/memberApplyPrize", cashParams);
         if (!cashRet.contains("提现成功")) {
             success = false;
             return success;

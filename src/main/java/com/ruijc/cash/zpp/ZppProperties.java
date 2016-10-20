@@ -11,7 +11,7 @@ import java.util.List;
  *
  * @author Storezhang
  */
-@ConfigurationProperties(prefix = "zpp")
+@ConfigurationProperties(prefix = "cash.zpp")
 public class ZppProperties {
 
     public static final String LOG_STORE = "zpp";
@@ -20,12 +20,10 @@ public class ZppProperties {
 
     private List<User> users;
     private double minCash;
-    private int retry;
 
     @PostConstruct
     public void init() {
         minCash = 5;
-        retry = 10;
     }
 
     public List<User> getUsers() {
@@ -42,13 +40,5 @@ public class ZppProperties {
 
     public void setMinCash(double minCash) {
         this.minCash = minCash;
-    }
-
-    public int getRetry() {
-        return retry;
-    }
-
-    public void setRetry(int retry) {
-        this.retry = retry;
     }
 }

@@ -26,11 +26,11 @@ public class ZppApi {
     public boolean login(String username, String password) {
         boolean success = false;
 
-        if (!client.downloadFile("http://www.zhuanpaopao.com/welcome/verifyCode", "code.jpg")) {
+        if (!client.downloadFile("http://www.zhuanpaopao.com/welcome/verifyCode", "zpp-code.jpg")) {
             success = false;
             return success;
         }
-        String code = client.post("http://data.tehir.cn/url/Api/VCRInterface.ashx?apikey=646B7F4EB194A042E76E2615924FF84A&flag=zhuanpaopao", null, null, "", "img", new File("code.jpg"));
+        String code = client.post("http://data.tehir.cn/url/Api/VCRInterface.ashx?apikey=646B7F4EB194A042E76E2615924FF84A&flag=zhuanpaopao", null, null, "", "img", new File("zpp-code.jpg"));
         Map<String, String> params = new HashMap<String, String>();
         params.put("uid_mail", username);
         params.put("pwd", password);
@@ -48,6 +48,7 @@ public class ZppApi {
 
     public void logout() {
         client.get("http://member.zhuanpaopao.com/user/userout");
+        client.clearCookies();
     }
 
     public double getMoney() {

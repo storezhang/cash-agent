@@ -1,4 +1,4 @@
-package com.ruijc.cash.mayi;
+package com.ruijc.cash.tingyun;
 
 import com.ruijc.cash.bean.User;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -11,20 +11,14 @@ import java.util.List;
  *
  * @author Storezhang
  */
-@ConfigurationProperties(prefix = "cash.mayi")
-public class MayiProperties {
+@ConfigurationProperties(prefix = "cash.tingyun")
+public class TingyunProperties {
 
-    public static final String LOG_STORE = "mayi";
+    public static final String LOG_STORE = "tingyun";
     public static final String LOG_TOP_CASH = "cash";
     public static final String LOG_TOP_LOGIN = "login";
 
     private List<User> users;
-    private double minCash;
-
-    @PostConstruct
-    public void init() {
-        minCash = 1;
-    }
 
     public List<User> getUsers() {
         return users;
@@ -32,13 +26,5 @@ public class MayiProperties {
 
     public void setUsers(List<User> users) {
         this.users = users;
-    }
-
-    public double getMinCash() {
-        return minCash;
-    }
-
-    public void setMinCash(double minCash) {
-        this.minCash = minCash;
     }
 }

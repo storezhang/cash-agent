@@ -1,6 +1,12 @@
-zpp:
-  minCash: 5
+cash:
   retry: 3
-  users:
-    - username: storezhang@gmail.com
-      password: xtkthh13284@$
+  zpp:
+    minCash: 5
+    users:
+      - username: storezhang@gmail.com
+        password: xtkthh13284@$
+  mayi:
+    minCash: 1
+    users:
+      - username: storezhang
+        password: xtkthh13284#%
