@@ -13,6 +13,10 @@ import java.util.List;
 @ConfigurationProperties(prefix = "zpp")
 public class ZppProperties {
 
+    public static final String LOG_STORE = "zpp";
+    public static final String LOG_TOP_CASH = "cash";
+    public static final String LOG_TOP_LOGIN = "cash";
+
     private List<User> users;
     private double minCash;
     private int retry;
