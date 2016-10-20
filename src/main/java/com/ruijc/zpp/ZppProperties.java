@@ -1,8 +1,10 @@
 package com.ruijc.zpp;
 
+import com.ruijc.zpp.bean.User;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import javax.annotation.PostConstruct;
+import java.util.List;
 
 /**
  * 赚泡泡配置
@@ -11,30 +13,22 @@ import javax.annotation.PostConstruct;
 @ConfigurationProperties(prefix = "zpp")
 public class ZppProperties {
 
-    private String username;
-    private String password;
+    private List<User> users;
     private double minCash;
     private int retry;
 
     @PostConstruct
     public void init() {
+        minCash = 5;
         retry = 10;
     }
 
-    public String getUsername() {
-        return username;
+    public List<User> getUsers() {
+        return users;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
+    public void setUsers(List<User> users) {
+        this.users = users;
     }
 
     public double getMinCash() {

@@ -1,5 +1,10 @@
 package com.ruijc.zpp.api;
 
+import com.ruijc.http.HttpClient;
+import com.ruijc.util.NumberUtils;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.io.File;
@@ -43,27 +48,30 @@ public class ZppApi {
         client.get("http://member.zhuanpaopao.com/user/userout");
     }
 
-    public boolean cash(double minMoney) {
-        boolean success = false;
-
+    public double getMoney() {
+        double money = 0;
         client.get("http://member.zhuanpaopao.com/tmplogin/index");
         String cashInfo = client.get("http://member.zhuanpaopao.com/user/user_cashinfo");
         Document doc = Jsoup.parse(cashInfo);
         Elements cashElement = doc.select("#neikuang div div span");
         if (null == cashElement) {
-            success = false;
-            return success;
+            return money;
         }
 
-        double money = NumberUtils.getDouble(cashElement.text());
-        if (money >= minMoney) {
-            Map<String, String> cashParams = new HashMap<String, String>();
-            cashParams.put("money", money + "");
-            String cashRet = client.post("http://member.zhuanpaopao.com/user/cash", cashParams);
-            if (!"ok".equals(cashRet)) {
-                success = false;
-                return success;
-            }
+        money = NumberUtils.getDouble(cashElement.text());
+
+        return money;
+    }
+
+    public boolean cash(int money) {
+        boolean success;
+
+        Map<String, String> cashParams = new HashMap<String, String>();
+        cashParams.put("money", money + "");
+        String cashRet = client.post("http://member.zhuanpaopao.com/user/cash", cashParams);
+        if (!"ok".equals(cashRet)) {
+            success = false;
+            return success;
         }
 
         success = true;

@@ -1,2 +1,6 @@
-http:
-  connectionTimeout : 100
+zpp:
+  minCash: 5
+  retry: 3
+  users:
+    - username: storezhang@gmail.com
+      password: xtkthh13284@$
