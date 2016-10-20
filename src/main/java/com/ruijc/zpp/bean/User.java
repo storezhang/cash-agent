@@ -3,7 +3,8 @@ package com.ruijc.zpp.bean;
 import com.ruijc.BaseObject;
 
 /**
- *赚泡泡用户
+ * 赚泡泡用户
+ *
  * @author Storezhang
  */
 public class User extends BaseObject {

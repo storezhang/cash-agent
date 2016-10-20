@@ -8,6 +8,7 @@ import java.util.List;
 
 /**
  * 赚泡泡配置
+ *
  * @author Storezhang
  */
 @ConfigurationProperties(prefix = "zpp")

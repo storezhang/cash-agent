@@ -7,12 +7,14 @@ import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  * 赚泡泡工具类
+ *
  * @author Storezhang
  */
 @Service
