@@ -1,6 +1,6 @@
 package com.ruijc.cash.zpp;
 
-import com.ruijc.cash.bean.User;
+import com.ruijc.cash.zpp.bean.ZppUser;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import javax.annotation.PostConstruct;
@@ -18,7 +18,7 @@ public class ZppProperties {
     public static final String LOG_TOP_CASH = "cash";
     public static final String LOG_TOP_LOGIN = "login";
 
-    private List<User> users;
+    private List<ZppUser> users;
     private double minCash;
 
     @PostConstruct
@@ -26,11 +26,11 @@ public class ZppProperties {
         minCash = 5;
     }
 
-    public List<User> getUsers() {
+    public List<ZppUser> getUsers() {
         return users;
     }
 
-    public void setUsers(List<User> users) {
+    public void setUsers(List<ZppUser> users) {
         this.users = users;
     }
 

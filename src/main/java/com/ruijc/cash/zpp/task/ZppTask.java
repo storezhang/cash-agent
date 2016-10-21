@@ -1,9 +1,9 @@
 package com.ruijc.cash.zpp.task;
 
 import com.ruijc.cash.CashProperties;
-import com.ruijc.cash.bean.User;
 import com.ruijc.cash.zpp.ZppProperties;
 import com.ruijc.cash.zpp.api.ZppApi;
+import com.ruijc.cash.zpp.bean.ZppUser;
 import com.ruijc.log.ILogger;
 import com.ruijc.util.CollectionUtils;
 import com.ruijc.util.StringUtils;
@@ -29,17 +29,17 @@ public class ZppTask {
 
     @Scheduled(cron = "0 48 10 * * ?")
     public void cash() {
-        List<User> users = zppProperties.getUsers();
+        List<ZppUser> users = zppProperties.getUsers();
         if (CollectionUtils.isBlank(users)) {
             return;
         }
 
-        for (User user : users) {
+        for (ZppUser user : users) {
             for (int i = 0; i < cashProperties.getRetry(); ++i) {
                 if (StringUtils.isAnyBlank(user.getUsername(), user.getPassword())) {
                     continue;
                 }
-                int ret = cash(user.getUsername(), user.getPassword());
+                int ret = cash(user.getUsername(), user.getPassword(), user.getType());
                 switch (ret) {
                     case 1:
                     case -3:
@@ -52,7 +52,7 @@ public class ZppTask {
         }
     }
 
-    private int cash(String username, String password) {
+    private int cash(String username, String password, String type) {
         int ret = 0;
 
         if (StringUtils.isAnyBlank(username, password)) {
@@ -72,7 +72,16 @@ public class ZppTask {
 
         double money = api.getMoney();
         if (money >= zppProperties.getMinCash()) {
-            if (api.cash((int) money)) {
+            String realType = "1";
+            switch (type) {
+                case "ALIPAY":
+                    realType = "1";
+                    break;
+                case "BANK":
+                    realType = "2";
+                    break;
+            }
+            if (api.cash((int) money, realType)) {
                 ret = 1;
                 logger.log(ZppProperties.LOG_STORE, ZppProperties.LOG_TOP_CASH, "", "success", true, "money", (int) money, "msg", "提现成功！");
             } else {

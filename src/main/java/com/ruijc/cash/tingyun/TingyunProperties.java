@@ -3,7 +3,6 @@ package com.ruijc.cash.tingyun;
 import com.ruijc.cash.bean.User;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-import javax.annotation.PostConstruct;
 import java.util.List;
 
 /**
