@@ -27,7 +27,7 @@ public class ZppTask {
     @Autowired
     private ILogger logger;
 
-    @Scheduled(cron = "0 48 10 * * ?")
+    @Scheduled(cron = "18 10 10 * * ?")
     public void cash() {
         List<ZppUser> users = zppProperties.getUsers();
         if (CollectionUtils.isBlank(users)) {
@@ -58,14 +58,14 @@ public class ZppTask {
         if (StringUtils.isAnyBlank(username, password)) {
             ret = -1;
 
-            logger.log(ZppProperties.LOG_STORE, ZppProperties.LOG_TOP_LOGIN, "", "success", false, "msg", "用户名或者密码为空！");
+            logger.log(ZppProperties.LOG_STORE, ZppProperties.LOG_TOP_LOGIN, "", "success", false, "username", username, "msg", "用户名或者密码为空！");
 
             return ret;
         }
         if (!api.login(username, password)) {
             ret = -2;
 
-            logger.log(ZppProperties.LOG_STORE, ZppProperties.LOG_TOP_LOGIN, "", "success", false, "msg", "登录失败！");
+            logger.log(ZppProperties.LOG_STORE, ZppProperties.LOG_TOP_LOGIN, "", "success", false, "username", username, "msg", "登录失败！");
 
             return ret;
         }
@@ -73,7 +73,7 @@ public class ZppTask {
         double money = api.getMoney();
         if (money >= zppProperties.getMinCash()) {
             String realType = "1";
-            switch (type) {
+            switch (type.toUpperCase()) {
                 case "ALIPAY":
                     realType = "1";
                     break;
@@ -83,14 +83,14 @@ public class ZppTask {
             }
             if (api.cash((int) money, realType)) {
                 ret = 1;
-                logger.log(ZppProperties.LOG_STORE, ZppProperties.LOG_TOP_CASH, "", "success", true, "money", (int) money, "msg", "提现成功！");
+                logger.log(ZppProperties.LOG_STORE, ZppProperties.LOG_TOP_CASH, "", "success", true, "money", (int) money, "username", username, "msg", "提现成功！");
             } else {
                 ret = -2;
             }
         } else {
             ret = -3;
 
-            logger.log(ZppProperties.LOG_STORE, ZppProperties.LOG_TOP_CASH, "", "success", false, "money", money, "msg", "提现失败，余额不足！");
+            logger.log(ZppProperties.LOG_STORE, ZppProperties.LOG_TOP_CASH, "", "success", false, "money", money, "username", username, "msg", "提现失败，余额不足！");
         }
 
         api.logout();

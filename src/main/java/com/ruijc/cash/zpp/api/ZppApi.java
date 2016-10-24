@@ -71,7 +71,7 @@ public class ZppApi {
 
         Map<String, String> cashParams = new HashMap<String, String>();
         cashParams.put("money", money + "");
-        cashParams.put("type", type);
+        cashParams.put("checktype", type);
         String cashRet = client.post("http://member.zhuanpaopao.com/user/cash", cashParams);
         if (!"ok".equals(cashRet)) {
             success = false;

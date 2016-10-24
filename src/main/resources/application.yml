@@ -5,6 +5,7 @@ cash:
     users:
       - username: storezhang@gmail.com
         password: xtkthh13284@$
+        type: ALIPAY
   mayi:
     minCash: 1
     users:

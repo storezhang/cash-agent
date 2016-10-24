@@ -58,37 +58,16 @@ public class TingyunTask {
         if (StringUtils.isAnyBlank(username, password)) {
             ret = -1;
 
-            logger.log(TingyunProperties.LOG_STORE, TingyunProperties.LOG_TOP_LOGIN, "", "success", false, "msg", "用户名或者密码为空！");
+            logger.log(TingyunProperties.LOG_STORE, TingyunProperties.LOG_TOP_LOGIN, "", "success", false, "username", username, "msg", "用户名或者密码为空！");
 
             return ret;
         }
         if (!api.login(username, password)) {
             ret = -2;
 
-            logger.log(TingyunProperties.LOG_STORE, TingyunProperties.LOG_TOP_LOGIN, "", "success", false, "msg", "登录失败！");
+            logger.log(TingyunProperties.LOG_STORE, TingyunProperties.LOG_TOP_LOGIN, "", "success", false, "username", username, "msg", "登录失败！");
 
             return ret;
-        }
-
-        int surplus = api.getSurplusTixianTimes();
-        if (surplus < 1) {
-            logger.log(TingyunProperties.LOG_STORE, TingyunProperties.LOG_TOP_CASH, "", "success", false, "msg", "提现次数不足！");
-
-            ret = -3;
-            return ret;
-        }
-        double money = api.getMoney();
-        if (money >= mayiProperties.getMinCash()) {
-            if (api.cash((int) money)) {
-                ret = 1;
-                logger.log(TingyunProperties.LOG_STORE, TingyunProperties.LOG_TOP_CASH, "", "success", true, "money", (int) money, "msg", "提现成功！");
-            } else {
-                ret = -2;
-            }
-        } else {
-            ret = -3;
-
-            logger.log(TingyunProperties.LOG_STORE, TingyunProperties.LOG_TOP_CASH, "", "success", false, "money", money, "msg", "提现失败，余额不足！");
         }
 
         api.logout();
