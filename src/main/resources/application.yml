@@ -12,7 +12,7 @@ cash:
       - username: storezhang
         password: xtkthh13284#%
   shenqi:
-    minCash: 30
+    minCash: 20
     successRet: ﻿<script language='javascript'> location='/index.php';</script>
     users:
       - username: storezhang
