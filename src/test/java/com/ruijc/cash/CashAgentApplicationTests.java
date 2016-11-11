@@ -1,6 +1,9 @@
 package com.ruijc.cash;
 
 import com.ruijc.cash.mayi.api.MayiApi;
+import com.ruijc.cash.shenqi.api.ShenqiApi;
+import com.ruijc.cash.shenqi.task.ShenqiTask;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,12 +15,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class CashAgentApplicationTests {
 
     @Autowired
-    private MayiApi mayiApi;
+    private ShenqiTask shenqiTask;
 
     @Test
-    public void testMayi() {
-        mayiApi.login("storezhang", "xtkthh13284#%");
-        mayiApi.getSurplusTixianTimes();
+    public void testShenqi() {
+        shenqiTask.cash();
     }
 
 }

@@ -30,6 +30,7 @@ public class ZppApi {
             success = false;
             return success;
         }
+        //http://data.tehir.cn/url/Api/VCRInterface.ashx?apikey=646B7F4EB194A042E76E2615924FF84A&flag=zhuanpaopao&ImgUrl=http://www.zhuanpaopao.com/welcome/verifyCode
         String code = client.post("http://data.tehir.cn/url/Api/VCRInterface.ashx?apikey=646B7F4EB194A042E76E2615924FF84A&flag=zhuanpaopao", null, null, "", "img", new File("zpp-code.jpg"));
         Map<String, String> params = new HashMap<String, String>();
         params.put("uid_mail", username);
