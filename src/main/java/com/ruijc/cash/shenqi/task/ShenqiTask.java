@@ -40,7 +40,7 @@ public class ShenqiTask {
                 if (StringUtils.isAnyBlank(user.getUsername(), user.getPassword())) {
                     continue;
                 }
-                int ret = cash(user.getUsername(), user.getPassword(), shenqiProperties.getSuccessRet());
+                int ret = cash(user.getUsername(), user.getPassword());
                 switch (ret) {
                     case 1:
                     case -3:
@@ -53,7 +53,7 @@ public class ShenqiTask {
         }
     }
 
-    private int cash(String username, String password, String successRet) {
+    private int cash(String username, String password) {
         int ret = 0;
 
         if (StringUtils.isAnyBlank(username, password)) {
@@ -63,7 +63,7 @@ public class ShenqiTask {
 
             return ret;
         }
-        if (!api.login(username, password, successRet)) {
+        if (!api.login(username, password)) {
             ret = -2;
 
             logger.log(ShenqiProperties.LOG_STORE, ShenqiProperties.LOG_TOP_LOGIN, "", "success", false, "username", username, "msg", "登录失败！");

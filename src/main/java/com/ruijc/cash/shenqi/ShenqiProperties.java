@@ -21,7 +21,6 @@ public class ShenqiProperties {
 
     private List<User> users;
     private int minCash;
-    private String successRet;
 
     @PostConstruct
     public void init() {
@@ -42,13 +41,5 @@ public class ShenqiProperties {
 
     public void setMinCash(int minCash) {
         this.minCash = minCash;
-    }
-
-    public String getSuccessRet() {
-        return successRet;
-    }
-
-    public void setSuccessRet(String successRet) {
-        this.successRet = successRet;
     }
 }

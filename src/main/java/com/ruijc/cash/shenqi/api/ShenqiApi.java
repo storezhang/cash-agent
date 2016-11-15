@@ -24,7 +24,7 @@ public class ShenqiApi {
     private HttpClient client;
 
 
-    public boolean login(String username, String password, String successRet) {
+    public boolean login(String username, String password) {
         boolean success = false;
 
         if (!client.downloadFile("http://www.shen-qi.com/yz/code_char.php", "shenqi-code.jpg")) {
@@ -39,7 +39,7 @@ public class ShenqiApi {
         params.put("code", code);
 
         String ret = client.post("http://www.shen-qi.com/webdo/logdo.php", params, null, "http://www.shen-qi.com", "", null);
-        if (!successRet.trim().equals(ret.trim())) {//﻿<script language='javascript'> location='/index.php';</script>
+        if (!ret.contains("index.php")) {//﻿<script language='javascript'> location='/index.php';</script>
             success = false;
         } else {
             success = true;
