@@ -73,7 +73,7 @@ public class ShenqiTask {
 
         double money = api.getMoney();
         int rate = api.getRate();
-        int rmb = (int) (money / rate) * rate;
+        int rmb = (int) (money / rate);
         if (rmb >= shenqiProperties.getMinCash()) {
             if (api.cash(api.getId(), (int) money)) {
                 ret = 1;
