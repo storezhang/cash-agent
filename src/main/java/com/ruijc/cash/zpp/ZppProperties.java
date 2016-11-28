@@ -21,8 +21,7 @@ public class ZppProperties {
     private List<ZppUser> users;
     private double minCash;
 
-    @PostConstruct
-    public void init() {
+    public ZppProperties() {
         minCash = 5;
     }
 

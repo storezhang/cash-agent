@@ -21,8 +21,7 @@ public class MayiProperties {
     private List<User> users;
     private double minCash;
 
-    @PostConstruct
-    public void init() {
+    public MayiProperties() {
         minCash = 1;
     }
 

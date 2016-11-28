@@ -1,0 +1,18 @@
+cash:
+  retry: 3
+  zpp:
+    minCash: 5
+    users:
+      - username: storezhang@gmail.com
+        password: xtkthh13284@$
+        type: ALIPAY
+  mayi:
+    minCash: 1
+    users:
+      - username: storezhang
+        password: xtkthh13284#%
+  shenqi:
+    minCash: 20
+    users:
+      - username: storezhang
+        password: xtkthh13284#%

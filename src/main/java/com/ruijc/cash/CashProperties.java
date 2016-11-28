@@ -14,8 +14,7 @@ public class CashProperties {
 
     private int retry;
 
-    @PostConstruct
-    public void init() {
+    public CashProperties() {
         retry = 10;
     }
 

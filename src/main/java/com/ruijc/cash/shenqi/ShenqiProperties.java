@@ -22,8 +22,7 @@ public class ShenqiProperties {
     private List<User> users;
     private int minCash;
 
-    @PostConstruct
-    public void init() {
+    public ShenqiProperties() {
         minCash = 10;
     }
 
