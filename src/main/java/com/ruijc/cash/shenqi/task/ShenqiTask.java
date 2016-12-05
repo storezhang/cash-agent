@@ -75,7 +75,7 @@ public class ShenqiTask {
         int rate = api.getRate();
         int rmb = (int) (money / rate);
         if (rmb >= shenqiProperties.getMinCash()) {
-            if (api.cash(api.getId(), (int) money)) {
+            if (api.cash(api.getId(), rmb * rate)) {
                 ret = 1;
                 logger.log(ShenqiProperties.LOG_STORE, ShenqiProperties.LOG_TOP_CASH, "", "success", true, "money", rmb * rate, "username", username, "msg", "提现成功！");
             } else {
