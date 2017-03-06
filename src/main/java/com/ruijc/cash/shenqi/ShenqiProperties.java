@@ -21,9 +21,11 @@ public class ShenqiProperties {
 
     private List<User> users;
     private int minCash;
+    private int rate;
 
     public ShenqiProperties() {
         minCash = 10;
+        rate = 300;
     }
 
     public List<User> getUsers() {
@@ -40,5 +42,13 @@ public class ShenqiProperties {
 
     public void setMinCash(int minCash) {
         this.minCash = minCash;
+    }
+
+    public int getRate() {
+        return rate;
+    }
+
+    public void setRate(int rate) {
+        this.rate = rate;
     }
 }

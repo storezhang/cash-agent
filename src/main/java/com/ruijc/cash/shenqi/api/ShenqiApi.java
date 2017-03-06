@@ -25,7 +25,7 @@ public class ShenqiApi {
 
 
     public boolean login(String username, String password) {
-        boolean success = false;
+        boolean success;
 
         if (!client.downloadFile("http://www.shen-qi.com/yz/code_char.php", "shenqi-code.jpg")) {
             success = false;
@@ -58,7 +58,7 @@ public class ShenqiApi {
 
         String cashInfo = client.get("http://www.shen-qi.com/index.php");
         Document doc = Jsoup.parse(cashInfo);
-        Elements cashElement = doc.select("#dhModal div div .modal-body p font");
+        Elements cashElement = doc.select("div:contains(其中推广奖励)").select("h1").eq(1);
         if (null == cashElement) {
             return money;
         }
@@ -68,43 +68,12 @@ public class ShenqiApi {
         return money;
     }
 
-    public int getId() {
-        int money = 0;
-
-        String idInfo = client.get("http://www.shen-qi.com/index.php");
-        Document doc = Jsoup.parse(idInfo);
-        Elements idElement = doc.select("#myid");
-        if (null == idElement) {
-            return money;
-        }
-
-        money = NumberUtils.getInt(idElement.text());
-
-        return money;
-    }
-
-    public int getRate() {
-        int rate = 0;
-
-        String rateInfo = client.get("http://www.shen-qi.com/index.php");
-        Document doc = Jsoup.parse(rateInfo);
-        Elements rateElement = doc.select("#dhpoint");
-        if (null == rateElement) {
-            return rate;
-        }
-
-        rate = NumberUtils.getInt(rateElement.attr("placeholder").split(",")[1].split(":")[0]);
-
-        return rate;
-    }
-
-    public boolean cash(int id, int money) {
+    public boolean cash(int money) {
         boolean success;
 
         Map<String, String> cashParams = new HashMap<String, String>();
         cashParams.put("dhpoint", money + "");
         cashParams.put("type", "dhpoint");
-        cashParams.put("uid", id + "");
         String cashRet = client.post("http://www.shen-qi.com/webdo/indexdo.php", cashParams, null, "http://www.shen-qi.com/index.php", "", null);
         if (!"success".equals(cashRet)) {
             success = false;
