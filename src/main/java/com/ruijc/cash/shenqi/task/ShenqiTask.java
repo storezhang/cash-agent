@@ -28,7 +28,7 @@ public class ShenqiTask {
     @Autowired
     private ILogger logger;
 
-    @Scheduled(cron = "18 58 15 * * ?")
+    @Scheduled(cron = "18 01 11 * * ?")
     public void cash() {
         List<User> users = shenqiProperties.getUsers();
         if (CollectionUtils.isBlank(users)) {
