@@ -58,7 +58,7 @@ public class ShenqiApi {
 
         String cashInfo = client.get("http://www.shen-qi.com/index.php");
         Document doc = Jsoup.parse(cashInfo);
-        Elements cashElement = doc.select("div:contains(其中推广奖励)").select("h1").eq(1);
+        Elements cashElement = doc.select("div:contains(其中推广奖励)").select("h1").eq(0);
         if (null == cashElement) {
             return money;
         }
