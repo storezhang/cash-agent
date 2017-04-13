@@ -22,10 +22,12 @@ public class ShenqiProperties {
     private List<User> users;
     private int minCash;
     private int rate;
+    private int maxMsgSize;
 
     public ShenqiProperties() {
         minCash = 10;
         rate = 300;
+        maxMsgSize = 50;
     }
 
     public List<User> getUsers() {
@@ -50,5 +52,13 @@ public class ShenqiProperties {
 
     public void setRate(int rate) {
         this.rate = rate;
+    }
+
+    public int getMaxMsgSize() {
+        return maxMsgSize;
+    }
+
+    public void setMaxMsgSize(int maxMsgSize) {
+        this.maxMsgSize = maxMsgSize;
     }
 }
