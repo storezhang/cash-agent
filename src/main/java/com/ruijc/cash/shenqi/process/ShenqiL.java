@@ -64,7 +64,7 @@ public class ShenqiL {
     private ILogger logger;
 
     public boolean add(String username, String password, List<String> msgs, Message.Type type) {
-        logger.log(ShenqiProperties.LOG_STORE, ShenqiProperties.LOG_TOP_MSG, "", "success", true, "type", type.getType(), "content", msg, "msg", "添加消息。");
+        logger.log(ShenqiProperties.LOG_STORE, ShenqiProperties.LOG_TOP_MSG, "", "success", true, "type", type.getType(), "msg", "更新消息开始。");
 
         boolean success = true;
 
@@ -110,6 +110,8 @@ public class ShenqiL {
             }
             logger.log(ShenqiProperties.LOG_STORE, ShenqiProperties.LOG_TOP_MSG, "", "success", true, "type", type.getType(), "content", msg, "msg", "添加消息。");
         }
+
+        logger.log(ShenqiProperties.LOG_STORE, ShenqiProperties.LOG_TOP_MSG, "", "success", true, "type", type.getType(), "msg", "更新消息结束。");
 
         return success;
     }

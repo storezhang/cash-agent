@@ -1,7 +1,5 @@
 package com.ruijc.cash;
 
-import com.ruijc.cash.shenqi.api.ShenqiApi;
-import com.ruijc.cash.shenqi.bean.Message;
 import com.ruijc.cash.shenqi.task.ShenqiTask;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,16 +13,14 @@ public class CashAgentApplicationTests {
 
     @Autowired
     private ShenqiTask task;
-    @Autowired
-    private ShenqiApi api;
 
     @Test
     public void testShenqiCash() {
-        task.cash();
+        //task.cash();
     }
 
     @Test
     public void testShenqiWords() {
-        task.addWords();
+        //task.addWords();
     }
 }
