@@ -14,6 +14,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -61,6 +62,8 @@ public class ShenqiTask {
         if (CollectionUtils.isBlank(words)) {
             return;
         }
+
+        Collections.shuffle(words);
 
         List<User> users = shenqiProperties.getUsers();
         if (CollectionUtils.isBlank(users)) {

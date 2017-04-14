@@ -36,6 +36,7 @@ import com.ruijc.cash.shenqi.api.ShenqiApi;
 import com.ruijc.cash.shenqi.bean.Message;
 import com.ruijc.log.ILogger;
 import com.ruijc.util.CollectionUtils;
+import com.ruijc.util.RandomUtils;
 import com.ruijc.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -63,6 +64,8 @@ public class ShenqiL {
     private ILogger logger;
 
     public boolean add(String username, String password, List<String> msgs, Message.Type type) {
+        logger.log(ShenqiProperties.LOG_STORE, ShenqiProperties.LOG_TOP_MSG, "", "success", true, "type", type.getType(), "content", msg, "msg", "添加消息。");
+
         boolean success = true;
 
         if (StringUtils.isAnyBlank(username, password)) {
@@ -85,11 +88,13 @@ public class ShenqiL {
             for (Message msg : nowMessages) {
                 success = api.delete(msg) && success;
                 try {
-                    TimeUnit.SECONDS.sleep(1);
+                    TimeUnit.SECONDS.sleep(RandomUtils.nextInt(10));
                 } catch (Exception e) {
                     logger.log(ShenqiProperties.LOG_STORE, ShenqiProperties.LOG_TOP_MSG, "", "success", false, "username", username, "msg", "停顿失败！");
                 }
+                logger.log(ShenqiProperties.LOG_STORE, ShenqiProperties.LOG_TOP_MSG, "", "success", true, "type", type.getType(), "content", msg.getMsg(), "msg", "删除消息。");
             }
+            nowMessages = api.getMessages(type);
         }
 
         if (msgs.size() > shenqiProperties.getMaxMsgSize()) {
@@ -99,10 +104,11 @@ public class ShenqiL {
         for (String msg : msgs) {
             success = api.add(type, msg) && success;
             try {
-                TimeUnit.SECONDS.sleep(1);
+                TimeUnit.SECONDS.sleep(RandomUtils.nextInt(10));
             } catch (Exception e) {
                 logger.log(ShenqiProperties.LOG_STORE, ShenqiProperties.LOG_TOP_MSG, "", "success", false, "username", username, "msg", "停顿失败！");
             }
+            logger.log(ShenqiProperties.LOG_STORE, ShenqiProperties.LOG_TOP_MSG, "", "success", true, "type", type.getType(), "content", msg, "msg", "添加消息。");
         }
 
         return success;
