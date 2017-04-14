@@ -27,10 +27,4 @@ public class CashAgentApplicationTests {
     public void testShenqiWords() {
         task.addWords();
     }
-
-    @Test
-    public void testShenqiAddWord() {
-        api.login("storezhang", "xtkthh13284#%");
-        api.add(Message.Type.RES, "测试一下");
-    }
 }

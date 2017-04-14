@@ -113,6 +113,7 @@ public class ShenqiApi {
 
         Map<String, String> params = new HashMap<String, String>();
         params.put("type", "add_" + type.getType());
+        params.put("msg", msg);
         String ret = client.post("http://www.shen-qi.com/webdo/indexdo.php", params, null, "http://www.shen-qi.com/index.php", "", null);
         if (!"addmsgok".equals(ret)) {
             success = false;

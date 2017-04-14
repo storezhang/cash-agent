@@ -72,11 +72,11 @@ public class ShenqiTask {
                 if (StringUtils.isAnyBlank(user.getUsername(), user.getPassword())) {
                     continue;
                 }
-                shenqiL.add(user.getUsername(), user.getPassword(), words.subList(0, words.size() / 4), Message.Type.MSG);
-                /*shenqiL.add(user.getUsername(), user.getPassword(), RandomUtils.randomList(words, 50), Message.Type.RES);
-                shenqiL.add(user.getUsername(), user.getPassword(), RandomUtils.randomList(words, 50), Message.Type.COMMENT);
-                shenqiL.add(user.getUsername(), user.getPassword(), RandomUtils.randomList(words, 50), Message.Type.QUN_MSG);
-                shenqiL.add(user.getUsername(), user.getPassword(), RandomUtils.randomList(words, 50), Message.Type.QUN_RES);*/
+                shenqiL.add(user.getUsername(), user.getPassword(), words.subList(0, words.size() / 5), Message.Type.MSG);
+                shenqiL.add(user.getUsername(), user.getPassword(), words.subList(words.size() / 5 + 1, words.size() / 5 * 2), Message.Type.RES);
+                shenqiL.add(user.getUsername(), user.getPassword(), words.subList(words.size() / 5 * 2 + 1, words.size() / 5 * 3), Message.Type.COMMENT);
+                shenqiL.add(user.getUsername(), user.getPassword(), words.subList(words.size() / 5 * 3 + 1, words.size() / 5 * 4), Message.Type.QUN_MSG);
+                shenqiL.add(user.getUsername(), user.getPassword(), words.subList(words.size() / 5 * 4 + 1, words.size()), Message.Type.QUN_RES);
             }
         }
     }

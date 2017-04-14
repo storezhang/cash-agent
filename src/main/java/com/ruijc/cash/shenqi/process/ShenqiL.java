@@ -42,6 +42,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 神器逻辑
@@ -83,6 +84,11 @@ public class ShenqiL {
         while (!CollectionUtils.isBlank(nowMessages)) {
             for (Message msg : nowMessages) {
                 success = api.delete(msg) && success;
+                try {
+                    TimeUnit.SECONDS.sleep(1);
+                } catch (Exception e) {
+                    logger.log(ShenqiProperties.LOG_STORE, ShenqiProperties.LOG_TOP_MSG, "", "success", false, "username", username, "msg", "停顿失败！");
+                }
             }
         }
 
@@ -92,6 +98,11 @@ public class ShenqiL {
 
         for (String msg : msgs) {
             success = api.add(type, msg) && success;
+            try {
+                TimeUnit.SECONDS.sleep(1);
+            } catch (Exception e) {
+                logger.log(ShenqiProperties.LOG_STORE, ShenqiProperties.LOG_TOP_MSG, "", "success", false, "username", username, "msg", "停顿失败！");
+            }
         }
 
         return success;
@@ -122,14 +133,14 @@ public class ShenqiL {
         if (rmb >= shenqiProperties.getMinCash()) {
             if (api.cash(rmb * rate)) {
                 ret = 1;
-                logger.log(ShenqiProperties.LOG_STORE, ShenqiProperties.LOG_TOP_CASH, "", "success", true, "money", rmb * rate, "username", username, "msg", "提现成功！");
+                logger.log(ShenqiProperties.LOG_STORE, ShenqiProperties.LOG_TOP_MSG, "", "success", true, "money", rmb * rate, "username", username, "msg", "提现成功！");
             } else {
                 ret = -2;
             }
         } else {
             ret = -3;
 
-            logger.log(ShenqiProperties.LOG_STORE, ShenqiProperties.LOG_TOP_CASH, "", "success", false, "money", money, "username", username, "msg", "提现失败，余额不足！");
+            logger.log(ShenqiProperties.LOG_STORE, ShenqiProperties.LOG_TOP_MSG, "", "success", false, "money", money, "username", username, "msg", "提现失败，余额不足！");
         }
 
         api.logout();

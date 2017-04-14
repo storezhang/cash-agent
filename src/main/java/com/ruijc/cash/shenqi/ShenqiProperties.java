@@ -17,6 +17,7 @@ public class ShenqiProperties {
 
     public static final String LOG_STORE = "shenqi";
     public static final String LOG_TOP_CASH = "cash";
+    public static final String LOG_TOP_MSG = "msg";
     public static final String LOG_TOP_LOGIN = "login";
 
     private List<User> users;
