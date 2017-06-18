@@ -30,7 +30,7 @@ public class MayiApi {
         params.put("username", username);
         params.put("password", password);
 
-        String ret = client.post("http://www.mayiluntan.com/login/dologin.html", params, null, "http://www.mayiluntan.com", "", null);
+        String ret = client.post("http://www.mayiluntan.com/login/dologin.html", params, null, "http://www.mayiluntan.com", "", null, "UTF-8");
         if (!ret.contains("登录成功")) {
             success = false;
         } else {

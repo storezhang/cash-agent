@@ -24,19 +24,19 @@ public class TingyunApi {
     private HttpClient client;
 
     public boolean login(String username, String password) {
-        boolean success = false;
+        boolean success;
 
         if (!client.downloadFile("http://member.tingyun.com/member/user/getImage", "tingyun-code.jpg")) {
             success = false;
             return success;
         }
-        String code = client.post("http://data.tehir.cn/url/Api/VCRInterface.ashx?apikey=646B7F4EB194A042E76E2615924FF84A&flag=tingyun", null, null, "", "img", new File("tingyun-code.jpg"));
+        String code = client.post("http://data.tehir.cn/url/Api/VCRInterface.ashx?apikey=646B7F4EB194A042E76E2615924FF84A&flag=tingyun", null, null, "", "img", new File("tingyun-code.jpg"), "UTF-8");
         Map<String, String> params = new HashMap<String, String>();
         params.put("loginName", username);
         params.put("password", password);
         params.put("captcha", code);
 
-        String ret = client.post("http://member.tingyun.com/member/login", params, null, "http://www.tingyun.com", "", null);
+        String ret = client.post("http://member.tingyun.com/member/login", params, null, "http://www.tingyun.com", "", null, "UTFf-8");
         if (!ret.contains("登录成功")) {
             success = false;
         } else {

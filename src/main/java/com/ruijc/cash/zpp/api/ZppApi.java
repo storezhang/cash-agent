@@ -31,13 +31,13 @@ public class ZppApi {
             return success;
         }
         //http://data.tehir.cn/url/Api/VCRInterface.ashx?apikey=646B7F4EB194A042E76E2615924FF84A&flag=zhuanpaopao&ImgUrl=http://www.zhuanpaopao.com/welcome/verifyCode
-        String code = client.post("http://data.tehir.cn/url/Api/VCRInterface.ashx?apikey=646B7F4EB194A042E76E2615924FF84A&flag=zhuanpaopao", null, null, "", "img", new File("zpp-code.jpg"));
+        String code = client.post("http://data.tehir.cn/url/Api/VCRInterface.ashx?apikey=646B7F4EB194A042E76E2615924FF84A&flag=zhuanpaopao", null, null, "", "img", new File("zpp-code.jpg"), "UTF-8");
         Map<String, String> params = new HashMap<String, String>();
         params.put("uid_mail", username);
         params.put("pwd", password);
         params.put("check_code", code);
 
-        String ret = client.post("http://www.zhuanpaopao.com/welcome/login", params, null, "http://www.zhuanpaopao.com/", "", null);
+        String ret = client.post("http://www.zhuanpaopao.com/welcome/login", params, null, "http://www.zhuanpaopao.com/", "", null, "UTF-8");
         if (!"ok".equals(ret)) {
             success = false;
         } else {
