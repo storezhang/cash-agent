@@ -38,13 +38,13 @@ public class ShenqiApi {
             return success;
         }
         //http://data.tehir.cn/url/Api/VCRInterface.ashx?apikey=646B7F4EB194A042E76E2615924FF84A&flag=zhuanpaopao&ImgUrl=http://www.zhuanpaopao.com/welcome/verifyCode
-        String code = client.post("http://data.tehir.cn/url/Api/VCRInterface.ashx?apikey=646B7F4EB194A042E76E2615924FF84A&flag=shenqi", null, null, "", "img", new File("shenqi-code.jpg"), "UTF-8");
+        String code = client.post("http://data.tehir.cn/url/Api/VCRInterface.ashx?apikey=646B7F4EB194A042E76E2615924FF84A&flag=shenqi", null, null, "", "img", new File("shenqi-code.jpg"));
         Map<String, String> params = new HashMap<String, String>();
         params.put("username", username);
         params.put("password", password);
         params.put("code", code);
 
-        String ret = client.post("http://www.shen-qi.com/webdo/logdo.php", params, null, "http://www.shen-qi.com", "", null, "UTF-8");
+        String ret = client.post("http://www.shen-qi.com/webdo/logdo.php", params, null, "http://www.shen-qi.com", "", null);
         if (!ret.contains("index.php")) {//﻿<script language='javascript'> location='/index.php';</script>
             success = false;
         } else {
@@ -80,7 +80,7 @@ public class ShenqiApi {
         Map<String, String> cashParams = new HashMap<String, String>();
         cashParams.put("dhpoint", money + "");
         cashParams.put("type", "dhpoint");
-        String cashRet = client.post("http://www.shen-qi.com/webdo/indexdo.php", cashParams, null, "http://www.shen-qi.com/index.php", "", null, "UTF-8");
+        String cashRet = client.post("http://www.shen-qi.com/webdo/indexdo.php", cashParams, null, "http://www.shen-qi.com/index.php", "", null);
         if (!"success".equals(cashRet)) {
             success = false;
             return success;
@@ -97,7 +97,7 @@ public class ShenqiApi {
         Map<String, String> params = new HashMap<String, String>();
         params.put("type", "delmsg");
         params.put("id", msg.getId() + "");
-        String ret = client.post("http://www.shen-qi.com/webdo/indexdo.php", params, null, "http://www.shen-qi.com/index.php", "", null, "UTF-8");
+        String ret = client.post("http://www.shen-qi.com/webdo/indexdo.php", params, null, "http://www.shen-qi.com/index.php", "", null);
         if (!"delmsgok".equals(ret)) {
             success = false;
             return success;
@@ -114,7 +114,7 @@ public class ShenqiApi {
         Map<String, String> params = new HashMap<String, String>();
         params.put("type", "add_" + type.getType());
         params.put("msg", msg);
-        String ret = client.post("http://www.shen-qi.com/webdo/indexdo.php", params, null, "http://www.shen-qi.com/index.php", "", null, "UTF-8");
+        String ret = client.post("http://www.shen-qi.com/webdo/indexdo.php", params, null, "http://www.shen-qi.com/index.php", "", null);
         if (!"addmsgok".equals(ret)) {
             success = false;
             return success;
@@ -130,7 +130,7 @@ public class ShenqiApi {
 
         Map<String, String> params = new HashMap<String, String>();
         params.put("type", "more_list_" + type.getType());
-        String ret = client.post("http://www.shen-qi.com/webdo/indexdo.php", params, null, "http://www.shen-qi.com/index.php", "", null, "UTF-8");
+        String ret = client.post("http://www.shen-qi.com/webdo/indexdo.php", params, null, "http://www.shen-qi.com/index.php", "", null);
         try {
             messages = JSON.parseArray(ret, Message.class);
         } catch (Exception e) {
