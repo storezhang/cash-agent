@@ -13,10 +13,6 @@ node {
             sh "mvn -Dmaven.test.failure.ignore clean package"
         }
 
-        stage("生成测试报告") {
-            junit "target/surefire-reports/*.xml"
-        }
-
         stage("打包Docker镜像") {
             timeout(600) {
                 sh "docker build --rm -t ${DOCKER_IMAGE_NAME} ."
