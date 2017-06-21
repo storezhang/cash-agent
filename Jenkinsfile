@@ -3,7 +3,6 @@ node {
     def DOCKER_REGISTRY = "storezhang"
     def DOCKER_IMAGE_NAME = JOB_NAME
 
-    echo "$TAG_NAME"
     try {
         stage("拉取代码") {
             checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'storezhang-common-old', url: 'https://git.ruijc.com/storezhang/cash-agent.git']]])
