@@ -3,7 +3,12 @@ node {
     def DOCKER_REGISTRY = "storezhang"
     def DOCKER_IMAGE_NAME = JOB_NAME
 
-    echo "$BUILD_TAG"
+    def TAG_NAME = binding.variables.get("TAG_NAME")
+    if (TAG_NAME != null) {
+        sh "echo $TAG_NAME"
+    } else {
+        sh "echo Non-tag build"
+    }
     try {
         stage("拉取代码") {
             checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'storezhang-common-old', url: 'https://git.ruijc.com/storezhang/cash-agent.git']]])
