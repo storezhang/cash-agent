@@ -9,16 +9,12 @@ node {
         }
 
         stage("执行Maven编译") {
-            dir("${WORK_PATH}") {
-                sh "mvn -version"
-                sh "mvn -Dmaven.test.failure.ignore clean package"
-            }
+            sh "mvn -version"
+            sh "mvn -Dmaven.test.failure.ignore clean package"
         }
 
         stage("生成测试报告") {
-            dir("${WORK_PATH}") {
-                junit "target/surefire-reports/*.xml"
-            }
+            junit "target/surefire-reports/*.xml"
         }
 
         stage("打包Docker镜像") {
