@@ -1,6 +1,6 @@
 node {
 
-    out.writeLine("任务名称：" + JOB_NAME);
+    echo "JOB_NAME"
     def TEMP = JOB_NAME.getAt(0..(JOB_NAME.length() - 7))
     def IMAGE_NAME = TEMP.substring(TEMP.lastIndexOf("/") + 1)
     def WORK_PATH = IMAGE_NAME
