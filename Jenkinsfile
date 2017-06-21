@@ -5,17 +5,16 @@ node {
 
     try {
         stage("拉取代码") {
-            deleteDir()
-            withCredentials([[$class: "UsernamePasswordMultiBinding", credentialsId: "storezhang-common-old", usernameVariable: "USERNAME", passwordVariable: "PASSWORD"]]) {
-                sh "git clone https://"${USERNAME}":"${PASSWORD}"@git.ruijc.com/storezhang/cash-agent.git"
-            }
+            checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'storezhang-common-old', url: 'https://git.ruijc.com/storezhang/cash-agent.git']]])
         }
+
         stage("执行Maven编译") {
             dir("${WORK_PATH}") {
                 sh "mvn -version"
                 sh "mvn -Dmaven.test.failure.ignore clean package"
             }
         }
+
         stage("生成测试报告") {
             dir("${WORK_PATH}") {
                 junit "target/surefire-reports/*.xml"
