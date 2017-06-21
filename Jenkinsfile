@@ -2,6 +2,8 @@ node {
 
     def DOCKER_REGISTRY = "storezhang"
     def DOCKER_IMAGE_NAME = JOB_NAME
+    def SERVER_HOST = "";
+    def SERVER_PORT = "";
 
     try {
         stage("拉取代码") {
@@ -21,6 +23,12 @@ node {
             withCredentials([usernamePassword(credentialsId: "storezhang-common-new", passwordVariable: "PASSWD", usernameVariable: "USERNAME")]) {
                 sh "docker login - u = '$USERNAME' - p = '$PASSWD'"
                 sh "docker push $DOCKER_REGISTRY/$DOCKER_IMAGE_NAME"
+            }
+        }
+
+        stage ("部署到服务器") {
+            withCredentials([usernamePassword(credentialsId: "storezhang-common-new", passwordVariable: "PASSWD", usernameVariable: "USERNAME")]) {
+                sh "sshpass -p $PASSWD ssh $USERNAME@$SERVER_HOST -p $SERVER_PORT 'echo $PASSWD | docker stop cash-agent && echo $PASSWD | sudo docker run -d --restart=always --name=cash-agent'"
             }
         }
     } catch (exc) {
