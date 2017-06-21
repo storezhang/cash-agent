@@ -15,7 +15,7 @@ node {
 
         stage("打包Docker镜像") {
             timeout(600) {
-                sh "docker build --rm -t ${DOCKER_IMAGE_NAME} ."
+                sh "docker build -t ${DOCKER_IMAGE_NAME} ."
             }
 
             withCredentials([usernamePassword(credentialsId: "storezhang-common-new", passwordVariable: "PASSWD", usernameVariable: "USERNAME")]) {
