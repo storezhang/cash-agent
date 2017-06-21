@@ -1,14 +1,12 @@
 node {
 
-    echo "$TAG_NAME"
-    def TEMP = JOB_NAME.getAt(0..(JOB_NAME.length() - 7))
-    def IMAGE_NAME = TEMP.substring(TEMP.lastIndexOf("/") + 1)
-    def WORK_PATH = IMAGE_NAME
+    def IMAGE_NAME = JOB_NAME
+    def WORK_PATH = JOB_NAME
 
     try {
         stage("拉取代码") {
             deleteDir()
-            withCredentials([[$class: "UsernamePasswordMultiBinding", credentialsId: "storezhang-common-new", usernameVariable: "USERNAME", passwordVariable: "PASSWORD"]]) {
+            withCredentials([[$class: "UsernamePasswordMultiBinding", credentialsId: "storezhang-common-old", usernameVariable: "USERNAME", passwordVariable: "PASSWORD"]]) {
                 sh "git clone https://"${USERNAME}":"${PASSWORD}"@git.ruijc.com/storezhang/cash-agent.git"
             }
         }
