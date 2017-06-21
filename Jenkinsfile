@@ -4,10 +4,6 @@ node {
     def DOCKER_IMAGE_NAME = JOB_NAME
 
     try {
-        stage("准备") {
-            deleteDir("target")
-        }
-
         stage("拉取代码") {
             checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'storezhang-common-old', url: 'https://git.ruijc.com/storezhang/cash-agent.git']]])
         }
