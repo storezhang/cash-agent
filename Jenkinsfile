@@ -1,7 +1,8 @@
 node {
 
-    def IMAGE_NAME = JOB_NAME
     def WORK_PATH = JOB_NAME
+    def DOCKER_REGISTRY = "storezhang"
+    def DOCKER_IMAGE_NAME = JOB_NAME
 
     try {
         stage("拉取代码") {
@@ -34,6 +35,10 @@ node {
                         sh "docker push hub-docker.ppgame.com/sgz2/${IMAGE_NAME}:latest"
                     }
                 }
+            }
+            withCredentials([usernamePassword(credentialsId: "storezhang-common-old", passwordVariable: "PASSWD", usernameVariable: "USERNAME")]) {
+                sh "docker login - u = '$USERNAME' - p = '$PASSWD'"
+                sh "docker push $DOCKER_IMAGE_NAME/$IMAGE_NAME"
             }
         }
 
