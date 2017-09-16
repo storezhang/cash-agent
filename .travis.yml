@@ -1,0 +1,21 @@
+sudo: required
+
+language: java
+
+jdk:
+  - oraclejdk8
+
+services:
+  - docker
+
+script: mvn clean verify build
+
+before_install:
+  - docker build -t storezhang/cash-agent .
+  - docker run -d storezhang/cash-agent
+
+after_success:
+  - if [ "$TRAVIS_BRANCH" == "master" ]; then
+      docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
+      docker push storezhang/cash-agent;
+    fi
