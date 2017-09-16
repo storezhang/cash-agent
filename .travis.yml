@@ -8,9 +8,8 @@ jdk:
 services:
   - docker
 
-script: mvn clean verify package
-
 before_install:
+  - mvn clean verify package
   - docker build -t storezhang/cash-agent .
   - docker run -d storezhang/cash-agent
 
