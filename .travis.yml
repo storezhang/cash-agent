@@ -10,8 +10,6 @@ services:
 
 before_install:
   - mvn clean verify package
-  - ls -la
-  - ls -la ./target
   - docker build -t storezhang/cash-agent .
   - docker run -d storezhang/cash-agent
 
