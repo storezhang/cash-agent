@@ -2,6 +2,7 @@ package com.ruijc.cash.tingyun.task;
 
 import com.ruijc.cash.CashProperties;
 import com.ruijc.cash.bean.User;
+import com.ruijc.cash.task.AbstractTask;
 import com.ruijc.cash.tingyun.TingyunProperties;
 import com.ruijc.cash.tingyun.api.TingyunApi;
 import com.ruijc.log.ILogger;
@@ -16,7 +17,7 @@ import java.util.List;
 
 @Service
 @EnableConfigurationProperties({TingyunProperties.class, CashProperties.class})
-public class TingyunTask {
+public class TingyunTask extends AbstractTask {
 
     @Autowired
     private TingyunApi api;
@@ -27,6 +28,7 @@ public class TingyunTask {
     @Autowired
     private ILogger logger;
 
+    @Override
     @Scheduled(cron = "0 48 10 * * ?")
     public void cash() {
         List<User> users = mayiProperties.getUsers();

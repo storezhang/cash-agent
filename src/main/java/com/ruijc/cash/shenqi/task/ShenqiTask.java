@@ -6,6 +6,7 @@ import com.ruijc.cash.bean.User;
 import com.ruijc.cash.shenqi.ShenqiProperties;
 import com.ruijc.cash.shenqi.bean.Message;
 import com.ruijc.cash.shenqi.process.ShenqiL;
+import com.ruijc.cash.task.ITask;
 import com.ruijc.util.CollectionUtils;
 import com.ruijc.util.RandomUtils;
 import com.ruijc.util.StringUtils;
@@ -19,7 +20,7 @@ import java.util.List;
 
 @Service
 @EnableConfigurationProperties({ShenqiProperties.class, CashProperties.class})
-public class ShenqiTask {
+public class ShenqiTask implements ITask {
 
     @Autowired
     private ShenqiL shenqiL;
@@ -30,6 +31,7 @@ public class ShenqiTask {
     @Autowired
     private IfengApi ifengApi;
 
+    @Override
     @Scheduled(cron = "11 01 11 * * ?")
     public void cash() {
         List<User> users = shenqiProperties.getUsers();
@@ -55,9 +57,9 @@ public class ShenqiTask {
         }
     }
 
-
+    @Override
     @Scheduled(cron = "23 21 23 * * ?")
-    public void addWords() {
+    public void post() {
         List<String> words = ifengApi.getNews();
         if (CollectionUtils.isBlank(words)) {
             return;

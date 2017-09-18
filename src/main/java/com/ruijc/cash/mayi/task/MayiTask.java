@@ -4,6 +4,7 @@ import com.ruijc.cash.CashProperties;
 import com.ruijc.cash.bean.User;
 import com.ruijc.cash.mayi.MayiProperties;
 import com.ruijc.cash.mayi.api.MayiApi;
+import com.ruijc.cash.task.AbstractTask;
 import com.ruijc.log.ILogger;
 import com.ruijc.util.CollectionUtils;
 import com.ruijc.util.StringUtils;
@@ -16,7 +17,7 @@ import java.util.List;
 
 @Service
 @EnableConfigurationProperties({MayiProperties.class, CashProperties.class})
-public class MayiTask {
+public class MayiTask extends AbstractTask {
 
     @Autowired
     private MayiApi api;
@@ -27,6 +28,7 @@ public class MayiTask {
     @Autowired
     private ILogger logger;
 
+    @Override
     @Scheduled(cron = "0 48 10 * * ?")
     public void cash() {
         List<User> users = mayiProperties.getUsers();

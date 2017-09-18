@@ -2,3 +2,6 @@ cash:
   retry: 3
   shenqi:
     minCash: 100
+    users:
+      - username: storezhang
+        password: xtkthh13284#%

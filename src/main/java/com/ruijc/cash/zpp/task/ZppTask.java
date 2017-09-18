@@ -1,6 +1,7 @@
 package com.ruijc.cash.zpp.task;
 
 import com.ruijc.cash.CashProperties;
+import com.ruijc.cash.task.AbstractTask;
 import com.ruijc.cash.zpp.ZppProperties;
 import com.ruijc.cash.zpp.api.ZppApi;
 import com.ruijc.cash.zpp.bean.ZppUser;
@@ -16,7 +17,7 @@ import java.util.List;
 
 @Service
 @EnableConfigurationProperties({ZppProperties.class, CashProperties.class})
-public class ZppTask {
+public class ZppTask extends AbstractTask {
 
     @Autowired
     private ZppApi api;
@@ -27,6 +28,7 @@ public class ZppTask {
     @Autowired
     private ILogger logger;
 
+    @Override
     @Scheduled(cron = "18 10 10 * * ?")
     public void cash() {
         List<ZppUser> users = zppProperties.getUsers();
