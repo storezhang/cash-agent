@@ -61,7 +61,7 @@ public class StartupRunner implements CommandLineRunner {
 
         for (ITask task : tasks) {
             task.cash();
-            task.post();
+            task.confSystem();
         }
     }
 }

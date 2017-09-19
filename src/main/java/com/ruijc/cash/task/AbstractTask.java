@@ -47,7 +47,7 @@ public class AbstractTask implements ITask {
     }
 
     @Override
-    public void post() {
+    public void confSystem() {
 
     }
 }

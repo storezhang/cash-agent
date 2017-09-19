@@ -41,7 +41,9 @@ package com.ruijc.cash.task;
  */
 public interface ITask {
 
+    // 提现
     public void cash();
 
-    public void post();
+    // 配置系统
+    public void confSystem();
 }

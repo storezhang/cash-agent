@@ -59,7 +59,7 @@ public class ShenqiTask implements ITask {
 
     @Override
     @Scheduled(cron = "23 21 23 * * ?")
-    public void post() {
+    public void confSystem() {
         List<String> words = ifengApi.getNews();
         if (CollectionUtils.isBlank(words)) {
             return;
