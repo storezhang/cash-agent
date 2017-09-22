@@ -35,6 +35,7 @@ import com.ruijc.cash.task.ITask;
 import com.ruijc.util.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingClass;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -48,6 +49,7 @@ import java.util.List;
  * @qq 160290688
  */
 @Service
+@ConditionalOnMissingClass("org.junit.Test")
 public class StartupRunner implements CommandLineRunner {
 
     @Autowired
