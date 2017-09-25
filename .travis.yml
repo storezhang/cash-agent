@@ -13,5 +13,5 @@ before_install:
   - mvn clean verify package
 
 after_success:
-  - chmod -R 777 .travis/push-to-docker.sh
-  - .travis/push-to-docker.sh
+  - chmod -R 777 push-to-docker.sh
+  - push-to-docker.sh

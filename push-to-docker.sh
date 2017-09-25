@@ -6,7 +6,7 @@ set -e
 if [ ! -z "$TRAVIS_TAG" ]; then
     echo -e "发现新标签，准备将新版本发布到Docker中央仓库"
 
-    docker build -t storezhang/cash-agent:$TRAVIS_TAG ../
+    docker build -t storezhang/cash-agent:$TRAVIS_TAG .
     docker run -d storezhang/cash-agent:$TRAVIS_TAG
     docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
     docker push storezhang/cash-agent:$TRAVIS_TAG;
