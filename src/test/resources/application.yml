@@ -1,0 +1,4 @@
+cash:
+  retry: 3
+  shenqi:
+    minCash: 20
