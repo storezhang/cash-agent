@@ -11,11 +11,7 @@ services:
 before_install:
   - chmod +x mvnw
   - mvn clean verify package
-  - docker build -t storezhang/cash-agent .
-  - docker run -d storezhang/cash-agent
 
 after_success:
-  - if [ "$TRAVIS_BRANCH" == "master" ]; then
-      docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
-      docker push storezhang/cash-agent;
-    fi
+  - chmod -R 777 .travis/push-to-docker.sh
+  - .travis/push-to-docker.sh
