@@ -16,11 +16,11 @@ public class CashAgentApplicationTests {
 
     @Test
     public void testShenqiCash() {
-        //task.cash();
+        task.cash();
     }
 
     @Test
     public void testShenqiWords() {
-        //task.addWords();
+        // task.addWords();
     }
 }

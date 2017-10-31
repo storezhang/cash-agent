@@ -32,13 +32,14 @@ package com.ruijc.cash.task;
 //                  不见满街漂亮妹，哪个归得程序员？
 
 /**
- * 抽象类
+ * 抽象
  *
  * @author Storezhang
- * @create 2017-09-18 21:34
- * @email storezhang@gmail.com
- * @qq 160290688
+ * Created 10/31/17 2:16 PM
+ * Email storezhang@gmail.com
+ * QQ 160290688
  */
+
 public class AbstractTask implements ITask {
 
     @Override
